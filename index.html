@@ -1,0 +1,2086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Ayaan Shaikh – Future AI Engineer, Developer & Tech Enthusiast. Explore my projects, skills, and journey in AI, Machine Learning, and Web Development.">
+<meta name="keywords" content="Ayaan Shaikh, AI Engineer, Developer, Portfolio, Machine Learning, Web Development, Cybersecurity">
+<meta property="og:title" content="Ayaan Shaikh | Future AI Engineer & Developer">
+<meta property="og:description" content="Personal portfolio of Ayaan Shaikh – AI, ML, Web Dev & Cybersecurity enthusiast.">
+<meta name="author" content="Ayaan Shaikh">
+<title>Ayaan Shaikh | Future AI Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+/* ===== RESET & BASE ===== */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg-0: #050810;
+  --bg-1: #080d1a;
+  --bg-2: #0d1525;
+  --bg-3: #111c30;
+  --glass: rgba(13, 21, 37, 0.7);
+  --glass-border: rgba(56, 189, 248, 0.15);
+  --cyan: #38bdf8;
+  --cyan-dim: #0ea5e9;
+  --cyan-glow: rgba(56, 189, 248, 0.25);
+  --blue: #3b82f6;
+  --blue-deep: #1d4ed8;
+  --violet: #818cf8;
+  --text-1: #f0f6ff;
+  --text-2: #94a3b8;
+  --text-3: #4b6a8a;
+  --success: #10b981;
+  --mono: 'JetBrains Mono', monospace;
+  --sans: 'Space Grotesk', sans-serif;
+  --radius: 16px;
+  --radius-sm: 8px;
+  --shadow: 0 8px 32px rgba(0,0,0,0.4);
+  --shadow-cyan: 0 0 24px rgba(56, 189, 248, 0.2);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--sans);
+  background: var(--bg-0);
+  color: var(--text-1);
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* ===== CUSTOM CURSOR ===== */
+.cursor-dot {
+  width: 8px; height: 8px;
+  background: var(--cyan);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 10000;
+  transition: transform 0.1s ease;
+}
+.cursor-ring {
+  width: 32px; height: 32px;
+  border: 1.5px solid rgba(56,189,248,0.5);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s ease, width 0.2s, height 0.2s, border-color 0.2s;
+}
+.cursor-ring.hover { width: 48px; height: 48px; border-color: var(--cyan); }
+
+/* ===== LOADING SCREEN ===== */
+#loader {
+  position: fixed; inset: 0;
+  background: var(--bg-0);
+  z-index: 9000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  transition: opacity 0.5s ease;
+}
+#loader.hide { opacity: 0; pointer-events: none; }
+.loader-logo {
+  font-family: var(--mono);
+  font-size: 2rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, var(--cyan), var(--blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: 4px;
+}
+.loader-bar-wrap {
+  width: 200px; height: 2px;
+  background: var(--bg-3);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.loader-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyan), var(--blue));
+  animation: loadbar 1.8s ease forwards;
+}
+@keyframes loadbar { from { width: 0 } to { width: 100% } }
+
+/* ===== NAV ===== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 16px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(5,8,16,0.7);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+nav.scrolled {
+  border-color: var(--glass-border);
+  box-shadow: 0 4px 24px rgba(0,0,0,0.4);
+}
+.nav-logo {
+  font-family: var(--mono);
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--cyan);
+  text-decoration: none;
+  letter-spacing: 2px;
+}
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--text-2);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  transition: color 0.2s;
+  position: relative;
+}
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0; right: 0;
+  height: 1px;
+  background: var(--cyan);
+  transform: scaleX(0);
+  transition: transform 0.2s;
+}
+.nav-links a:hover { color: var(--text-1); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-admin-btn {
+  padding: 6px 16px;
+  border: 1px solid var(--glass-border);
+  border-radius: 6px;
+  color: var(--text-3);
+  font-size: 0.75rem;
+  font-family: var(--mono);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.nav-admin-btn:hover { color: var(--cyan); border-color: var(--cyan); }
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 4px;
+}
+.hamburger span {
+  display: block; width: 24px; height: 2px;
+  background: var(--text-2);
+  transition: all 0.3s;
+}
+
+/* ===== HERO ===== */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+#hero-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 800px;
+  padding: 0 24px;
+  padding-top: 80px;
+}
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border: 1px solid var(--glass-border);
+  border-radius: 100px;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--cyan);
+  background: rgba(56,189,248,0.05);
+  margin-bottom: 24px;
+  animation: fadeUp 0.6s ease both;
+}
+.hero-tag .dot { width: 6px; height: 6px; background: var(--cyan); border-radius: 50%; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+.hero-name {
+  font-size: clamp(2.5rem, 7vw, 5.5rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  margin-bottom: 16px;
+  animation: fadeUp 0.6s 0.1s ease both;
+}
+.hero-name span {
+  background: linear-gradient(135deg, var(--cyan) 0%, var(--blue) 50%, var(--violet) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-subtitle {
+  font-family: var(--mono);
+  font-size: clamp(0.875rem, 2vw, 1.1rem);
+  color: var(--text-2);
+  margin-bottom: 12px;
+  animation: fadeUp 0.6s 0.2s ease both;
+  min-height: 1.6em;
+}
+.cursor-blink {
+  display: inline-block;
+  width: 2px; height: 1em;
+  background: var(--cyan);
+  margin-left: 2px;
+  animation: blink 1s infinite;
+  vertical-align: text-bottom;
+}
+@keyframes blink { 0%,50%{opacity:1} 51%,100%{opacity:0} }
+.hero-desc {
+  color: var(--text-2);
+  font-size: 1rem;
+  max-width: 520px;
+  margin: 0 auto 40px;
+  animation: fadeUp 0.6s 0.3s ease both;
+}
+.hero-btns {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeUp 0.6s 0.4s ease both;
+}
+.btn-primary {
+  padding: 14px 28px;
+  background: linear-gradient(135deg, var(--cyan-dim), var(--blue-deep));
+  color: white;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 0 24px rgba(14,165,233,0.3);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 36px rgba(14,165,233,0.5); }
+.btn-ghost {
+  padding: 14px 28px;
+  background: transparent;
+  color: var(--text-1);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+  backdrop-filter: blur(8px);
+}
+.btn-ghost:hover { border-color: var(--cyan); color: var(--cyan); background: rgba(56,189,248,0.05); }
+.hero-scroll {
+  position: absolute;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-3);
+  font-size: 0.75rem;
+  font-family: var(--mono);
+  animation: fadeUp 0.6s 0.8s ease both;
+}
+.scroll-line {
+  width: 1px; height: 40px;
+  background: linear-gradient(to bottom, var(--text-3), transparent);
+  animation: scrollDown 2s infinite;
+}
+@keyframes scrollDown { 0%{transform:scaleY(0);transform-origin:top} 50%{transform:scaleY(1);transform-origin:top} 51%{transform:scaleY(1);transform-origin:bottom} 100%{transform:scaleY(0);transform-origin:bottom} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+
+/* ===== SECTION BASE ===== */
+section { padding: 100px 0; }
+.container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--cyan);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+  display: block;
+}
+.section-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 16px;
+}
+.section-title span {
+  background: linear-gradient(135deg, var(--cyan), var(--blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.section-sub {
+  color: var(--text-2);
+  font-size: 1rem;
+  max-width: 540px;
+}
+
+/* ===== REVEAL ANIMATION ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ===== GLASS CARD ===== */
+.glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius);
+  backdrop-filter: blur(16px);
+}
+
+/* ===== ABOUT ===== */
+#about { background: var(--bg-1); }
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+  margin-top: 60px;
+}
+.about-avatar-wrap {
+  display: flex;
+  justify-content: center;
+}
+.about-avatar {
+  width: 240px; height: 240px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--glass-border);
+  box-shadow: var(--shadow-cyan);
+  background: var(--bg-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+  overflow: hidden;
+}
+.about-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.avatar-ring {
+  position: relative;
+  display: inline-block;
+}
+.avatar-ring::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: linear-gradient(135deg, var(--cyan), var(--blue), transparent, transparent) border-box;
+  -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  animation: rotateBorder 4s linear infinite;
+}
+@keyframes rotateBorder { to { transform: rotate(360deg) } }
+.about-text p {
+  color: var(--text-2);
+  margin-bottom: 16px;
+  font-size: 0.975rem;
+  line-height: 1.8;
+}
+.about-text p strong { color: var(--text-1); }
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 32px;
+}
+.stat-card {
+  padding: 20px;
+  text-align: center;
+}
+.stat-num {
+  font-family: var(--mono);
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--cyan), var(--blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+}
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-3);
+  margin-top: 6px;
+  letter-spacing: 0.5px;
+}
+
+/* ===== SKILLS ===== */
+#skills { background: var(--bg-0); }
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 60px;
+}
+.skill-card {
+  padding: 28px 20px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s;
+  cursor: default;
+}
+.skill-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(56,189,248,0.4);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.4), var(--shadow-cyan);
+}
+.skill-icon {
+  font-size: 2.2rem;
+  margin-bottom: 12px;
+  display: block;
+  transition: transform 0.3s;
+}
+.skill-card:hover .skill-icon { transform: scale(1.15); }
+.skill-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 8px;
+}
+.skill-bar-wrap {
+  height: 3px;
+  background: var(--bg-3);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+.skill-bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyan), var(--blue));
+  border-radius: 3px;
+  width: 0;
+  transition: width 1.2s ease;
+}
+
+/* ===== PROJECTS ===== */
+#projects { background: var(--bg-1); }
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  margin-top: 60px;
+}
+.project-card {
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+.project-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(56,189,248,0.35);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5), var(--shadow-cyan);
+}
+.project-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3.5rem;
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--glass-border);
+  transition: transform 0.4s;
+}
+.project-card:hover .project-img { transform: scale(1.05); }
+.project-body { padding: 24px; }
+.project-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+.project-desc { color: var(--text-2); font-size: 0.875rem; line-height: 1.7; margin-bottom: 16px; }
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+.tech-tag {
+  padding: 4px 10px;
+  background: rgba(56,189,248,0.08);
+  border: 1px solid rgba(56,189,248,0.2);
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-family: var(--mono);
+  color: var(--cyan);
+}
+.project-links { display: flex; gap: 12px; }
+.project-link {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s;
+}
+.project-link.github {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-2);
+}
+.project-link.github:hover { background: rgba(255,255,255,0.1); color: var(--text-1); }
+.project-link.demo {
+  background: linear-gradient(135deg, rgba(14,165,233,0.2), rgba(59,130,246,0.2));
+  border: 1px solid rgba(56,189,248,0.3);
+  color: var(--cyan);
+}
+.project-link.demo:hover { background: linear-gradient(135deg, rgba(14,165,233,0.35), rgba(59,130,246,0.35)); }
+
+/* ===== TIMELINE ===== */
+#journey { background: var(--bg-0); }
+.timeline {
+  position: relative;
+  max-width: 680px;
+  margin: 60px auto 0;
+  padding-left: 32px;
+}
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px; bottom: 8px;
+  width: 1px;
+  background: linear-gradient(to bottom, var(--cyan), var(--blue), transparent);
+}
+.timeline-item {
+  position: relative;
+  padding: 0 0 40px 32px;
+}
+.timeline-item::before {
+  content: '';
+  position: absolute;
+  left: -5px;
+  top: 6px;
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--cyan);
+  box-shadow: 0 0 12px var(--cyan);
+}
+.timeline-item.future::before { background: var(--text-3); box-shadow: none; border: 1px solid var(--text-3); }
+.timeline-year {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--cyan);
+  margin-bottom: 6px;
+}
+.timeline-item.future .timeline-year { color: var(--text-3); }
+.timeline-title { font-weight: 700; margin-bottom: 6px; }
+.timeline-desc { color: var(--text-2); font-size: 0.875rem; }
+
+/* ===== ACHIEVEMENTS ===== */
+#achievements { background: var(--bg-1); }
+.ach-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+  margin-top: 60px;
+}
+.ach-card {
+  padding: 36px 24px;
+  text-align: center;
+  transition: transform 0.3s, border-color 0.3s;
+}
+.ach-card:hover { transform: translateY(-6px); border-color: rgba(56,189,248,0.4); }
+.ach-icon { font-size: 2.5rem; margin-bottom: 16px; display: block; }
+.ach-num {
+  font-family: var(--mono);
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--cyan), var(--blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  line-height: 1;
+}
+.ach-label { color: var(--text-2); margin-top: 8px; font-size: 0.875rem; }
+.ach-plus {
+  font-family: var(--mono);
+  font-size: 2rem;
+  color: var(--cyan);
+  vertical-align: super;
+  font-size: 1.2rem;
+}
+
+/* ===== CONTACT ===== */
+#contact { background: var(--bg-0); }
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 48px;
+  margin-top: 60px;
+  align-items: start;
+}
+.contact-info h3 { font-size: 1.3rem; margin-bottom: 16px; }
+.contact-info p { color: var(--text-2); font-size: 0.9rem; line-height: 1.8; margin-bottom: 32px; }
+.contact-links { display: flex; flex-direction: column; gap: 16px; }
+.contact-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  text-decoration: none;
+  color: var(--text-2);
+  transition: color 0.2s, border-color 0.2s;
+}
+.contact-link:hover { color: var(--cyan); border-color: rgba(56,189,248,0.3); }
+.contact-link i { font-size: 1.1rem; color: var(--cyan); width: 20px; }
+.contact-form { display: flex; flex-direction: column; gap: 16px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group label { font-size: 0.8rem; color: var(--text-3); font-family: var(--mono); letter-spacing: 0.5px; }
+.form-control {
+  padding: 14px 16px;
+  background: var(--bg-2);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  color: var(--text-1);
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-control:focus {
+  border-color: rgba(56,189,248,0.5);
+  box-shadow: 0 0 0 3px rgba(56,189,248,0.08);
+}
+textarea.form-control { resize: vertical; min-height: 140px; }
+.form-status {
+  font-size: 0.85rem;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  display: none;
+}
+.form-status.success { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); color: #34d399; display: block; }
+.form-status.error { background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3); color: #f87171; display: block; }
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--bg-1);
+  border-top: 1px solid var(--glass-border);
+  padding: 48px 24px 32px;
+}
+.footer-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+.footer-socials { display: flex; gap: 16px; }
+.social-btn {
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-2);
+  text-decoration: none;
+  font-size: 1.1rem;
+  transition: all 0.2s;
+}
+.social-btn:hover { color: var(--cyan); border-color: rgba(56,189,248,0.3); background: rgba(56,189,248,0.05); }
+.footer-copy {
+  font-size: 0.8rem;
+  color: var(--text-3);
+  font-family: var(--mono);
+  text-align: center;
+}
+.back-top {
+  position: fixed;
+  bottom: 32px; right: 32px;
+  width: 44px; height: 44px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--cyan-dim), var(--blue-deep));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
+  z-index: 50;
+  box-shadow: 0 4px 16px rgba(14,165,233,0.4);
+}
+.back-top.show { opacity: 1; pointer-events: auto; }
+.back-top:hover { transform: translateY(-3px); }
+
+/* ===== ADMIN LOGIN OVERLAY ===== */
+#admin-login {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(5,8,16,0.95);
+  backdrop-filter: blur(20px);
+  z-index: 500;
+  align-items: center;
+  justify-content: center;
+}
+#admin-login.show { display: flex; }
+.login-box {
+  width: 100%;
+  max-width: 400px;
+  padding: 40px;
+  margin: 16px;
+}
+.login-box h2 {
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+}
+.login-box p { color: var(--text-3); font-size: 0.85rem; margin-bottom: 32px; }
+.login-box .form-group { margin-bottom: 16px; }
+.login-error {
+  color: #f87171;
+  font-size: 0.8rem;
+  margin-top: 8px;
+  display: none;
+}
+.login-close {
+  position: absolute;
+  top: 24px; right: 24px;
+  background: none;
+  border: none;
+  color: var(--text-3);
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.login-close:hover { color: var(--text-1); }
+
+/* ===== ADMIN DASHBOARD ===== */
+#admin-dash {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  overflow: hidden;
+}
+#admin-dash.show { display: flex; }
+.dash-sidebar {
+  width: 260px;
+  background: var(--bg-1);
+  border-right: 1px solid var(--glass-border);
+  display: flex;
+  flex-direction: column;
+  padding: 24px 0;
+  flex-shrink: 0;
+}
+.dash-logo {
+  padding: 0 24px 24px;
+  border-bottom: 1px solid var(--glass-border);
+  font-family: var(--mono);
+  font-size: 1rem;
+  color: var(--cyan);
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+.dash-nav {
+  flex: 1;
+  padding: 16px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  overflow-y: auto;
+}
+.dash-nav-item {
+  padding: 10px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  color: var(--text-2);
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.2s;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: left;
+}
+.dash-nav-item:hover { color: var(--text-1); background: rgba(255,255,255,0.05); }
+.dash-nav-item.active { color: var(--cyan); background: rgba(56,189,248,0.08); }
+.dash-nav-item i { width: 18px; font-size: 0.9rem; }
+.dash-logout {
+  padding: 16px 24px;
+  border-top: 1px solid var(--glass-border);
+}
+.btn-logout {
+  width: 100%;
+  padding: 10px;
+  background: rgba(239,68,68,0.1);
+  border: 1px solid rgba(239,68,68,0.2);
+  border-radius: 8px;
+  color: #f87171;
+  font-family: var(--sans);
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+.btn-logout:hover { background: rgba(239,68,68,0.2); }
+.dash-main {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--bg-0);
+  padding: 32px;
+}
+.dash-panel { display: none; }
+.dash-panel.active { display: block; }
+.dash-panel h2 { font-size: 1.4rem; margin-bottom: 24px; }
+.dash-panel h2 span { color: var(--cyan); }
+.dash-section {
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.dash-section h3 { font-size: 1rem; margin-bottom: 16px; color: var(--text-2); font-weight: 600; }
+.dash-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.dash-actions {
+  display: flex;
+  gap: 12px;
+  padding-top: 24px;
+  border-top: 1px solid var(--glass-border);
+  position: sticky;
+  bottom: 0;
+  background: var(--bg-0);
+  margin: 0 -32px;
+  padding: 16px 32px;
+  z-index: 10;
+}
+.btn-save {
+  padding: 12px 28px;
+  background: linear-gradient(135deg, var(--cyan-dim), var(--blue-deep));
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+.btn-save:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(14,165,233,0.4); }
+.btn-cancel {
+  padding: 12px 28px;
+  background: transparent;
+  color: var(--text-2);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  font-family: var(--sans);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-cancel:hover { color: var(--text-1); border-color: var(--text-2); }
+.projects-admin-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+.project-admin-item {
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.proj-admin-icon { font-size: 1.8rem; }
+.proj-admin-info { flex: 1; }
+.proj-admin-info strong { display: block; font-size: 0.9rem; margin-bottom: 2px; }
+.proj-admin-info span { color: var(--text-3); font-size: 0.75rem; }
+.proj-admin-btns { display: flex; gap: 8px; }
+.btn-icon {
+  width: 34px; height: 34px;
+  border-radius: 6px;
+  border: 1px solid var(--glass-border);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  color: var(--text-2);
+  transition: all 0.2s;
+}
+.btn-icon:hover { color: var(--text-1); background: rgba(255,255,255,0.05); }
+.btn-icon.danger:hover { color: #f87171; border-color: rgba(239,68,68,0.3); background: rgba(239,68,68,0.05); }
+.btn-add-project {
+  width: 100%;
+  padding: 14px;
+  background: rgba(56,189,248,0.05);
+  border: 1px dashed rgba(56,189,248,0.3);
+  border-radius: 8px;
+  color: var(--cyan);
+  font-family: var(--sans);
+  font-size: 0.875rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+.btn-add-project:hover { background: rgba(56,189,248,0.1); }
+.skills-admin-list { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+.skill-admin-tag {
+  padding: 6px 12px 6px 16px;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.825rem;
+}
+.skill-admin-tag button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-3);
+  font-size: 0.7rem;
+  transition: color 0.2s;
+  padding: 0;
+  line-height: 1;
+}
+.skill-admin-tag button:hover { color: #f87171; }
+.dash-save-toast {
+  position: fixed;
+  bottom: 80px;
+  right: 32px;
+  padding: 12px 20px;
+  background: rgba(16,185,129,0.15);
+  border: 1px solid rgba(16,185,129,0.3);
+  border-radius: 8px;
+  color: #34d399;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 600;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 0.3s;
+  pointer-events: none;
+}
+.dash-save-toast.show { opacity: 1; transform: none; }
+
+/* ===== PROJECT MODAL ===== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(5,8,16,0.9);
+  z-index: 600;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.modal-overlay.show { display: flex; }
+.modal-box {
+  width: 100%;
+  max-width: 560px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 32px;
+}
+.modal-box h3 { margin-bottom: 20px; font-size: 1.2rem; }
+.modal-box .form-group { margin-bottom: 14px; }
+.modal-actions { display: flex; gap: 12px; margin-top: 24px; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  .hamburger { display: flex; }
+  nav.menu-open .nav-links {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: 64px; left: 0; right: 0;
+    background: rgba(8,13,26,0.97);
+    padding: 24px;
+    gap: 16px;
+    border-bottom: 1px solid var(--glass-border);
+  }
+  .about-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; }
+  .dash-sidebar { width: 220px; }
+}
+@media (max-width: 640px) {
+  section { padding: 70px 0; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .ach-grid { grid-template-columns: 1fr 1fr; }
+  .hero-btns { flex-direction: column; align-items: center; }
+  .dash-main { padding: 16px; }
+  .dash-sidebar { width: 60px; }
+  .dash-logo, .dash-nav-item span, .dash-nav-item i + span, .btn-logout span { display: none; }
+  .dash-nav-item { justify-content: center; }
+  .btn-logout { justify-content: center; }
+  .dash-row { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">AS</div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+</div>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a href="#hero" class="nav-logo">AS</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#journey">Journey</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:12px;">
+    <button class="nav-admin-btn" id="adminBtn" title="Admin">⚙</button>
+    <div class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- BACK TO TOP -->
+<button class="back-top" id="backTop" aria-label="Back to top"><i class="fas fa-chevron-up"></i></button>
+
+<!-- ===================== HERO ===================== -->
+<section id="hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-content">
+    <div class="hero-tag"><span class="dot"></span><span id="hero-tag-text">Available for opportunities</span></div>
+    <h1 class="hero-name"><span id="hero-name">Ayaan Shaikh</span></h1>
+    <p class="hero-subtitle"><span id="typing-text"></span><span class="cursor-blink"></span></p>
+    <p class="hero-desc" id="hero-desc">Building the future through code — passionate about AI, Machine Learning, and creating impactful digital experiences.</p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary"><i class="fas fa-rocket"></i> View Projects</a>
+      <a href="#contact" class="btn-ghost"><i class="fas fa-paper-plane"></i> Contact Me</a>
+      <a href="#" class="btn-ghost" id="resume-btn"><i class="fas fa-download"></i> Resume</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    scroll
+  </div>
+</section>
+
+<!-- ===================== ABOUT ===================== -->
+<section id="about">
+  <div class="container">
+    <span class="section-label">Who I Am</span>
+    <h2 class="section-title">About <span>Me</span></h2>
+    <p class="section-sub">A curious mind driven by technology, creativity, and the relentless pursuit of knowledge.</p>
+    <div class="about-grid reveal">
+      <div class="about-avatar-wrap">
+        <div class="avatar-ring">
+          <div class="about-avatar" id="about-avatar">🧑‍💻</div>
+        </div>
+      </div>
+      <div class="about-text">
+        <p id="about-p1">Hi! I'm <strong>Ayaan Shaikh</strong>, a passionate student and aspiring AI Engineer from India. I'm deeply fascinated by the intersection of technology and human potential.</p>
+        <p id="about-p2">My interests span across <strong>Artificial Intelligence, Machine Learning, Cybersecurity,</strong> and <strong>Web Development</strong>. I love building projects that solve real-world problems and exploring cutting-edge technologies.</p>
+        <p id="about-p3">Currently on a journey to master the skills needed to become a <strong>future AI Researcher and Software Engineer</strong>, I dedicate my time to learning, building, and growing every single day.</p>
+        <div class="stats-grid" id="stats-grid">
+          <!-- filled by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== SKILLS ===================== -->
+<section id="skills">
+  <div class="container">
+    <span class="section-label">What I Know</span>
+    <h2 class="section-title">My <span>Skills</span></h2>
+    <p class="section-sub">Technologies and tools I've been working with.</p>
+    <div class="skills-grid reveal" id="skills-grid">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ===================== PROJECTS ===================== -->
+<section id="projects">
+  <div class="container">
+    <span class="section-label">What I've Built</span>
+    <h2 class="section-title">My <span>Projects</span></h2>
+    <p class="section-sub">A selection of things I've created and shipped.</p>
+    <div class="projects-grid reveal" id="projects-grid">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ===================== JOURNEY ===================== -->
+<section id="journey">
+  <div class="container">
+    <span class="section-label">How I Got Here</span>
+    <h2 class="section-title">Learning <span>Journey</span></h2>
+    <p class="section-sub">The milestones that have shaped who I am as a developer.</p>
+    <div class="timeline reveal" id="timeline">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ===================== ACHIEVEMENTS ===================== -->
+<section id="achievements">
+  <div class="container">
+    <span class="section-label">By the Numbers</span>
+    <h2 class="section-title">My <span>Achievements</span></h2>
+    <div class="ach-grid reveal" id="ach-grid">
+      <!-- filled by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CONTACT ===================== -->
+<section id="contact">
+  <div class="container">
+    <span class="section-label">Get In Touch</span>
+    <h2 class="section-title">Let's <span>Connect</span></h2>
+    <p class="section-sub">Have a project in mind, a question, or just want to say hi? I'd love to hear from you.</p>
+    <div class="contact-grid reveal">
+      <div>
+        <h3>Say Hello 👋</h3>
+        <p id="contact-desc">I'm always open to new opportunities, collaborations, and conversations about technology and AI. Don't hesitate to reach out!</p>
+        <div class="contact-links">
+          <a href="#" class="contact-link glass" id="contact-github-link"><i class="fab fa-github"></i><span id="contact-github">GitHub</span></a>
+          <a href="#" class="contact-link glass" id="contact-linkedin-link"><i class="fab fa-linkedin"></i><span id="contact-linkedin">LinkedIn</span></a>
+          <a href="#" class="contact-link glass" id="contact-email-link"><i class="fas fa-envelope"></i><span id="contact-email">Email</span></a>
+        </div>
+      </div>
+      <div>
+        <form class="contact-form glass" id="contact-form" style="padding:28px;">
+          <div class="form-group">
+            <label for="form-name">NAME</label>
+            <input type="text" id="form-name" class="form-control" placeholder="Your name" required>
+          </div>
+          <div class="form-group">
+            <label for="form-email">EMAIL</label>
+            <input type="email" id="form-email" class="form-control" placeholder="your@email.com" required>
+          </div>
+          <div class="form-group">
+            <label for="form-msg">MESSAGE</label>
+            <textarea id="form-msg" class="form-control" placeholder="Tell me about your project or idea..." required></textarea>
+          </div>
+          <div id="form-status" class="form-status"></div>
+          <button type="submit" class="btn-primary" style="width:100%;justify-content:center;" id="form-submit-btn">
+            <i class="fas fa-paper-plane"></i> Send Message
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FOOTER ===================== -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-socials" id="footer-socials">
+      <!-- filled by JS -->
+    </div>
+    <p class="footer-copy" id="footer-copy">© <span id="year"></span> Ayaan Shaikh. Crafted with ❤️ and lots of ☕</p>
+  </div>
+</footer>
+
+<!-- ===================== ADMIN LOGIN ===================== -->
+<div id="admin-login">
+  <div class="login-box glass">
+    <button class="login-close" id="loginClose"><i class="fas fa-times"></i></button>
+    <div style="font-family:var(--mono);color:var(--cyan);font-size:0.75rem;letter-spacing:3px;margin-bottom:16px;">ADMIN ACCESS</div>
+    <h2>Welcome Back</h2>
+    <p>Enter your credentials to access the dashboard.</p>
+    <div class="form-group">
+      <label for="login-user">USERNAME</label>
+      <input type="text" id="login-user" class="form-control" placeholder="admin" autocomplete="username">
+    </div>
+    <div class="form-group">
+      <label for="login-pass">PASSWORD</label>
+      <input type="password" id="login-pass" class="form-control" placeholder="••••••••" autocomplete="current-password">
+    </div>
+    <div class="login-error" id="login-error"><i class="fas fa-exclamation-triangle"></i> Invalid credentials. Try again.</div>
+    <button class="btn-primary" style="width:100%;justify-content:center;margin-top:16px;" id="login-submit">
+      <i class="fas fa-lock-open"></i> Login
+    </button>
+    <p style="font-size:0.75rem;color:var(--text-3);margin-top:16px;text-align:center;">Default: admin / ayaan2026</p>
+  </div>
+</div>
+
+<!-- ===================== ADMIN DASHBOARD ===================== -->
+<div id="admin-dash">
+  <div class="dash-sidebar">
+    <div class="dash-logo">DASHBOARD</div>
+    <div class="dash-nav">
+      <button class="dash-nav-item active" data-panel="panel-hero"><i class="fas fa-home"></i><span>Hero</span></button>
+      <button class="dash-nav-item" data-panel="panel-about"><i class="fas fa-user"></i><span>About</span></button>
+      <button class="dash-nav-item" data-panel="panel-skills"><i class="fas fa-code"></i><span>Skills</span></button>
+      <button class="dash-nav-item" data-panel="panel-projects"><i class="fas fa-briefcase"></i><span>Projects</span></button>
+      <button class="dash-nav-item" data-panel="panel-timeline"><i class="fas fa-clock"></i><span>Journey</span></button>
+      <button class="dash-nav-item" data-panel="panel-achievements"><i class="fas fa-trophy"></i><span>Stats</span></button>
+      <button class="dash-nav-item" data-panel="panel-contact"><i class="fas fa-envelope"></i><span>Contact</span></button>
+    </div>
+    <div class="dash-logout">
+      <button class="btn-logout" id="logoutBtn"><i class="fas fa-sign-out-alt"></i><span>Logout</span></button>
+    </div>
+  </div>
+  <div class="dash-main">
+
+    <!-- HERO PANEL -->
+    <div class="dash-panel active" id="panel-hero">
+      <h2>Edit <span>Hero</span></h2>
+      <div class="dash-section glass">
+        <h3>Hero Content</h3>
+        <div class="form-group" style="margin-bottom:14px"><label>Full Name</label><input class="form-control" id="d-name" placeholder="Ayaan Shaikh"></div>
+        <div class="form-group" style="margin-bottom:14px"><label>Subtitle (comma-separated for typing effect)</label><input class="form-control" id="d-subtitles" placeholder="Future AI Engineer, Developer, Tech Enthusiast"></div>
+        <div class="form-group" style="margin-bottom:14px"><label>Description</label><textarea class="form-control" id="d-hero-desc" rows="3" placeholder="Short bio..."></textarea></div>
+        <div class="form-group"><label>Resume Link (URL)</label><input class="form-control" id="d-resume" placeholder="https://drive.google.com/..."></div>
+      </div>
+      <div class="dash-actions">
+        <button class="btn-save" onclick="saveSection('hero')"><i class="fas fa-save"></i> Save Changes</button>
+        <button class="btn-cancel" onclick="loadDashData()"><i class="fas fa-times"></i> Cancel</button>
+      </div>
+    </div>
+
+    <!-- ABOUT PANEL -->
+    <div class="dash-panel" id="panel-about">
+      <h2>Edit <span>About</span></h2>
+      <div class="dash-section glass">
+        <h3>Profile Image</h3>
+        <div class="form-group"><label>Avatar Emoji (or image URL)</label><input class="form-control" id="d-avatar" placeholder="🧑‍💻 or https://..."></div>
+      </div>
+      <div class="dash-section glass">
+        <h3>About Text</h3>
+        <div class="form-group" style="margin-bottom:14px"><label>Paragraph 1</label><textarea class="form-control" id="d-about-p1" rows="3"></textarea></div>
+        <div class="form-group" style="margin-bottom:14px"><label>Paragraph 2</label><textarea class="form-control" id="d-about-p2" rows="3"></textarea></div>
+        <div class="form-group"><label>Paragraph 3</label><textarea class="form-control" id="d-about-p3" rows="3"></textarea></div>
+      </div>
+      <div class="dash-section glass">
+        <h3>Statistics</h3>
+        <div id="stats-editor"><!-- filled by JS --></div>
+      </div>
+      <div class="dash-actions">
+        <button class="btn-save" onclick="saveSection('about')"><i class="fas fa-save"></i> Save Changes</button>
+        <button class="btn-cancel" onclick="loadDashData()"><i class="fas fa-times"></i> Cancel</button>
+      </div>
+    </div>
+
+    <!-- SKILLS PANEL -->
+    <div class="dash-panel" id="panel-skills">
+      <h2>Edit <span>Skills</span></h2>
+      <div class="dash-section glass">
+        <h3>Current Skills</h3>
+        <div class="skills-admin-list" id="skills-admin-list"></div>
+        <h3 style="margin-top:20px">Add New Skill</h3>
+        <div class="dash-row">
+          <div class="form-group"><label>Skill Name</label><input class="form-control" id="new-skill-name" placeholder="React"></div>
+          <div class="form-group"><label>Icon (emoji or FA class)</label><input class="form-control" id="new-skill-icon" placeholder="⚛️"></div>
+        </div>
+        <div class="form-group" style="margin-top:14px"><label>Proficiency (0–100)</label><input type="range" class="form-control" id="new-skill-level" min="0" max="100" value="70" style="padding:8px 0;background:none;border:none;accent-color:var(--cyan)"></div>
+        <button class="btn-add-project" style="margin-top:12px" onclick="addSkill()"><i class="fas fa-plus"></i> Add Skill</button>
+      </div>
+      <div class="dash-actions">
+        <button class="btn-save" onclick="saveSection('skills')"><i class="fas fa-save"></i> Save Changes</button>
+        <button class="btn-cancel" onclick="loadDashData()"><i class="fas fa-times"></i> Cancel</button>
+      </div>
+    </div>
+
+    <!-- PROJECTS PANEL -->
+    <div class="dash-panel" id="panel-projects">
+      <h2>Edit <span>Projects</span></h2>
+      <div class="dash-section glass">
+        <h3>All Projects</h3>
+        <div class="projects-admin-list" id="projects-admin-list"></div>
+        <button class="btn-add-project" onclick="openProjectModal(-1)"><i class="fas fa-plus"></i> Add New Project</button>
+      </div>
+      <div class="dash-actions">
+        <button class="btn-save" onclick="saveSection('projects')"><i class="fas fa-save"></i> Save Changes</button>
+        <button class="btn-cancel" onclick="loadDashData()"><i class="fas fa-times"></i> Cancel</button>
+      </div>
+    </div>
+
+    <!-- TIMELINE PANEL -->
+    <div class="dash-panel" id="panel-timeline">
+      <h2>Edit <span>Journey</span></h2>
+      <div class="dash-section glass" id="timeline-editor"><!-- filled by JS --></div>
+      <div class="dash-actions">
+        <button class="btn-save" onclick="saveSection('timeline')"><i class="fas fa-save"></i> Save Changes</button>
+        <button class="btn-cancel" onclick="loadDashData()"><i class="fas fa-times"></i> Cancel</button>
+      </div>
+    </div>
+
+    <!-- ACHIEVEMENTS PANEL -->
+    <div class="dash-panel" id="panel-achievements">
+      <h2>Edit <span>Stats</span></h2>
+      <div class="dash-section glass" id="ach-editor"><!-- filled by JS --></div>
+      <div class="dash-actions">
+        <button class="btn-save" onclick="saveSection('achievements')"><i class="fas fa-save"></i> Save Changes</button>
+        <button class="btn-cancel" onclick="loadDashData()"><i class="fas fa-times"></i> Cancel</button>
+      </div>
+    </div>
+
+    <!-- CONTACT PANEL -->
+    <div class="dash-panel" id="panel-contact">
+      <h2>Edit <span>Contact</span></h2>
+      <div class="dash-section glass">
+        <div class="form-group" style="margin-bottom:14px"><label>Email</label><input class="form-control" id="d-email" placeholder="ayaan@email.com"></div>
+        <div class="form-group" style="margin-bottom:14px"><label>GitHub URL</label><input class="form-control" id="d-github" placeholder="https://github.com/..."></div>
+        <div class="form-group"><label>LinkedIn URL</label><input class="form-control" id="d-linkedin" placeholder="https://linkedin.com/in/..."></div>
+      </div>
+      <div class="dash-actions">
+        <button class="btn-save" onclick="saveSection('contact')"><i class="fas fa-save"></i> Save Changes</button>
+        <button class="btn-cancel" onclick="loadDashData()"><i class="fas fa-times"></i> Cancel</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===================== PROJECT MODAL ===================== -->
+<div class="modal-overlay" id="project-modal">
+  <div class="modal-box glass">
+    <h3 id="modal-title">Add Project</h3>
+    <div class="form-group" style="margin-bottom:12px"><label>Project Title</label><input class="form-control" id="pm-title" placeholder="My Project"></div>
+    <div class="form-group" style="margin-bottom:12px"><label>Description</label><textarea class="form-control" id="pm-desc" rows="3" placeholder="What does this project do?"></textarea></div>
+    <div class="form-group" style="margin-bottom:12px"><label>Emoji Icon</label><input class="form-control" id="pm-icon" placeholder="🚀"></div>
+    <div class="form-group" style="margin-bottom:12px"><label>Tech Stack (comma-separated)</label><input class="form-control" id="pm-tech" placeholder="HTML, CSS, JavaScript"></div>
+    <div class="form-group" style="margin-bottom:12px"><label>GitHub Link</label><input class="form-control" id="pm-github" placeholder="https://github.com/..."></div>
+    <div class="form-group"><label>Live Demo Link</label><input class="form-control" id="pm-demo" placeholder="https://..."></div>
+    <div class="modal-actions">
+      <button class="btn-save" id="modal-save-btn"><i class="fas fa-save"></i> Save Project</button>
+      <button class="btn-cancel" onclick="closeProjectModal()"><i class="fas fa-times"></i> Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- SAVE TOAST -->
+<div class="dash-save-toast" id="saveToast"><i class="fas fa-check-circle"></i> Saved successfully!</div>
+
+<script>
+// ===================== DEFAULT DATA =====================
+const DEFAULT_DATA = {
+  hero: {
+    name: "Ayaan Shaikh",
+    subtitles: ["Future AI Engineer", "Developer", "Tech Enthusiast", "Problem Solver"],
+    desc: "Building the future through code — passionate about AI, Machine Learning, and creating impactful digital experiences.",
+    resume: "#"
+  },
+  about: {
+    avatar: "🧑‍💻",
+    p1: "Hi! I'm <strong>Ayaan Shaikh</strong>, a passionate student and aspiring AI Engineer from India. I'm deeply fascinated by the intersection of technology and human potential.",
+    p2: "My interests span across <strong>Artificial Intelligence, Machine Learning, Cybersecurity,</strong> and <strong>Web Development</strong>. I love building projects that solve real-world problems and exploring cutting-edge technologies.",
+    p3: "Currently on a journey to master the skills needed to become a <strong>future AI Researcher and Software Engineer</strong>, I dedicate my time to learning, building, and growing every single day.",
+    stats: [
+      { num: "10+", label: "Projects Built" },
+      { num: "15+", label: "Technologies Learned" },
+      { num: "5+", label: "Certifications" },
+      { num: "90%", label: "Learning Progress" }
+    ]
+  },
+  skills: [
+    { name: "HTML", icon: "🌐", level: 90 },
+    { name: "CSS", icon: "🎨", level: 85 },
+    { name: "JavaScript", icon: "⚡", level: 75 },
+    { name: "Python", icon: "🐍", level: 80 },
+    { name: "Git & GitHub", icon: "🐙", level: 85 },
+    { name: "AI & ML", icon: "🤖", level: 65 },
+    { name: "Cybersecurity", icon: "🔐", level: 60 },
+    { name: "Problem Solving", icon: "🧩", level: 90 }
+  ],
+  projects: [
+    {
+      title: "GoalGear",
+      desc: "A modern football equipment e-commerce store with smooth UX, product catalog, and cart functionality.",
+      icon: "⚽",
+      tech: ["HTML", "CSS", "JavaScript"],
+      github: "#",
+      demo: "#"
+    },
+    {
+      title: "Scholar Finder",
+      desc: "A scholarship discovery platform that helps students find relevant scholarships based on their profile.",
+      icon: "🎓",
+      tech: ["Python", "Flask", "HTML/CSS"],
+      github: "#",
+      demo: "#"
+    },
+    {
+      title: "Future AI Assistant",
+      desc: "A personal AI assistant prototype that uses NLP to answer queries, manage tasks, and provide insights.",
+      icon: "🤖",
+      tech: ["Python", "AI/ML", "APIs"],
+      github: "#",
+      demo: "#"
+    },
+    {
+      title: "Portfolio Website",
+      desc: "This very portfolio — a premium, fully responsive personal website with an integrated CMS dashboard.",
+      icon: "🌟",
+      tech: ["HTML", "CSS", "JavaScript"],
+      github: "#",
+      demo: "#"
+    }
+  ],
+  timeline: [
+    { year: "2022", title: "Started Web Development", desc: "Began learning HTML, CSS and JavaScript. Built my first static websites.", future: false },
+    { year: "2023", title: "Learning Python", desc: "Dived deep into Python — data structures, OOP, scripting, and automation.", future: false },
+    { year: "2024", title: "AI & Machine Learning", desc: "Began exploring ML algorithms, neural networks, and data science fundamentals.", future: false },
+    { year: "2025", title: "Projects & Growth", desc: "Built multiple real-world projects, earned certifications, and expanded my skill set.", future: false },
+    { year: "2027", title: "Future Software Engineer", desc: "Goal: Join a top tech company and contribute to large-scale software systems.", future: true },
+    { year: "2030", title: "Future AI Researcher", desc: "Long-term goal: Conduct cutting-edge research in artificial intelligence.", future: true }
+  ],
+  achievements: [
+    { icon: "💻", num: 10, label: "Websites Built", suffix: "+" },
+    { icon: "⏱️", num: 500, label: "Coding Hours", suffix: "+" },
+    { icon: "🏆", num: 5, label: "Certifications", suffix: "" },
+    { icon: "⚙️", num: 15, label: "Technologies Learned", suffix: "+" }
+  ],
+  contact: {
+    email: "ayaan@example.com",
+    github: "https://github.com/",
+    linkedin: "https://linkedin.com/in/",
+    emailDisplay: "ayaan@example.com",
+    githubDisplay: "github.com/ayaanshaikh",
+    linkedinDisplay: "linkedin.com/in/ayaanshaikh"
+  },
+  auth: {
+    username: "admin",
+    password: "ayaan2026"
+  }
+};
+
+// ===================== STATE =====================
+let data = JSON.parse(JSON.stringify(DEFAULT_DATA));
+let editingProjectIndex = -1;
+let adminLoggedIn = false;
+
+function loadData() {
+  const stored = localStorage.getItem('portfolio_data_v2');
+  if (stored) {
+    try {
+      const parsed = JSON.parse(stored);
+      data = { ...DEFAULT_DATA, ...parsed };
+      data.hero = { ...DEFAULT_DATA.hero, ...parsed.hero };
+      data.about = { ...DEFAULT_DATA.about, ...parsed.about };
+      data.contact = { ...DEFAULT_DATA.contact, ...parsed.contact };
+      data.auth = { ...DEFAULT_DATA.auth, ...(parsed.auth || {}) };
+      if (parsed.skills) data.skills = parsed.skills;
+      if (parsed.projects) data.projects = parsed.projects;
+      if (parsed.timeline) data.timeline = parsed.timeline;
+      if (parsed.achievements) data.achievements = parsed.achievements;
+    } catch(e) { data = JSON.parse(JSON.stringify(DEFAULT_DATA)); }
+  }
+}
+
+function saveData() {
+  localStorage.setItem('portfolio_data_v2', JSON.stringify(data));
+}
+
+// ===================== RENDER SITE =====================
+function renderSite() {
+  const d = data;
+
+  // Hero
+  document.getElementById('hero-name').textContent = d.hero.name;
+  document.getElementById('hero-desc').textContent = d.hero.desc;
+  document.getElementById('resume-btn').href = d.hero.resume || '#';
+
+  // About
+  const av = document.getElementById('about-avatar');
+  if (d.about.avatar && d.about.avatar.startsWith('http')) {
+    av.innerHTML = `<img src="${d.about.avatar}" alt="Profile">`;
+  } else {
+    av.textContent = d.about.avatar || '🧑‍💻';
+  }
+  document.getElementById('about-p1').innerHTML = d.about.p1;
+  document.getElementById('about-p2').innerHTML = d.about.p2;
+  document.getElementById('about-p3').innerHTML = d.about.p3;
+  const sg = document.getElementById('stats-grid');
+  sg.innerHTML = d.about.stats.map(s => `
+    <div class="stat-card glass">
+      <div class="stat-num">${s.num}</div>
+      <div class="stat-label">${s.label}</div>
+    </div>`).join('');
+
+  // Skills
+  const skGrid = document.getElementById('skills-grid');
+  skGrid.innerHTML = d.skills.map((sk, i) => `
+    <div class="skill-card glass reveal" style="transition-delay:${i*0.07}s">
+      <span class="skill-icon">${sk.icon}</span>
+      <div class="skill-name">${sk.name}</div>
+      <div class="skill-bar-wrap"><div class="skill-bar" data-level="${sk.level}"></div></div>
+    </div>`).join('');
+
+  // Projects
+  const pg = document.getElementById('projects-grid');
+  pg.innerHTML = d.projects.map(p => `
+    <div class="project-card glass reveal">
+      <div class="project-img">${p.icon}</div>
+      <div class="project-body">
+        <h3 class="project-title">${p.title}</h3>
+        <p class="project-desc">${p.desc}</p>
+        <div class="project-tech">${p.tech.map(t=>`<span class="tech-tag">${t}</span>`).join('')}</div>
+        <div class="project-links">
+          <a href="${p.github}" target="_blank" class="project-link github"><i class="fab fa-github"></i> Code</a>
+          <a href="${p.demo}" target="_blank" class="project-link demo"><i class="fas fa-external-link-alt"></i> Live</a>
+        </div>
+      </div>
+    </div>`).join('');
+
+  // Timeline
+  const tl = document.getElementById('timeline');
+  tl.innerHTML = d.timeline.map(t => `
+    <div class="timeline-item ${t.future ? 'future' : ''}">
+      <div class="timeline-year">${t.year} ${t.future ? '— Goal' : ''}</div>
+      <div class="timeline-title">${t.title}</div>
+      <div class="timeline-desc">${t.desc}</div>
+    </div>`).join('');
+
+  // Achievements
+  const ag = document.getElementById('ach-grid');
+  ag.innerHTML = d.achievements.map(a => `
+    <div class="ach-card glass reveal">
+      <span class="ach-icon">${a.icon}</span>
+      <div class="ach-num counter" data-target="${a.num}">0${a.suffix}</div>
+      <div class="ach-label">${a.label}</div>
+    </div>`).join('');
+
+  // Contact
+  const ce = data.contact;
+  document.getElementById('contact-desc').textContent = "I'm always open to new opportunities, collaborations, and conversations about technology and AI. Don't hesitate to reach out!";
+  document.getElementById('contact-email').textContent = ce.emailDisplay || ce.email;
+  document.getElementById('contact-github').textContent = ce.githubDisplay || 'GitHub';
+  document.getElementById('contact-linkedin').textContent = ce.linkedinDisplay || 'LinkedIn';
+  document.getElementById('contact-email-link').href = `mailto:${ce.email}`;
+  document.getElementById('contact-github-link').href = ce.github;
+  document.getElementById('contact-linkedin-link').href = ce.linkedin;
+
+  // Footer
+  document.getElementById('footer-socials').innerHTML = `
+    <a href="${ce.github}" target="_blank" class="social-btn glass"><i class="fab fa-github"></i></a>
+    <a href="${ce.linkedin}" target="_blank" class="social-btn glass"><i class="fab fa-linkedin"></i></a>
+    <a href="mailto:${ce.email}" class="social-btn glass"><i class="fas fa-envelope"></i></a>`;
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Re-trigger observers
+  setTimeout(initReveal, 100);
+  setTimeout(initSkillBars, 200);
+  setTimeout(initCounters, 200);
+}
+
+// ===================== PARTICLES =====================
+function initParticles() {
+  const canvas = document.getElementById('hero-canvas');
+  const ctx = canvas.getContext('2d');
+  let W = canvas.width = window.innerWidth;
+  let H = canvas.height = window.innerHeight;
+  const particles = [];
+
+  for (let i = 0; i < 80; i++) {
+    particles.push({
+      x: Math.random() * W, y: Math.random() * H,
+      vx: (Math.random() - 0.5) * 0.4, vy: (Math.random() - 0.5) * 0.4,
+      r: Math.random() * 1.5 + 0.5,
+      alpha: Math.random() * 0.5 + 0.1
+    });
+  }
+
+  let mouse = { x: W/2, y: H/2 };
+  window.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
+  window.addEventListener('resize', () => {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  });
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+      if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+
+      const dx = mouse.x - p.x, dy = mouse.y - p.y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      const alpha = dist < 120 ? p.alpha * (1 + (120 - dist) / 120) : p.alpha;
+
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(56,189,248,${Math.min(alpha, 0.9)})`;
+      ctx.fill();
+    });
+
+    particles.forEach((a, i) => {
+      particles.slice(i+1).forEach(b => {
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const d = Math.sqrt(dx*dx + dy*dy);
+        if (d < 120) {
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = `rgba(56,189,248,${0.12 * (1 - d/120)})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
+        }
+      });
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+// ===================== TYPING ANIMATION =====================
+function initTyping() {
+  const subtitles = data.hero.subtitles || ["Future AI Engineer"];
+  const el = document.getElementById('typing-text');
+  let sIdx = 0, cIdx = 0, deleting = false;
+
+  function type() {
+    const current = subtitles[sIdx];
+    if (deleting) {
+      el.textContent = current.substring(0, cIdx--);
+      if (cIdx < 0) { deleting = false; sIdx = (sIdx + 1) % subtitles.length; setTimeout(type, 500); return; }
+    } else {
+      el.textContent = current.substring(0, cIdx++);
+      if (cIdx > current.length) { deleting = true; setTimeout(type, 2000); return; }
+    }
+    setTimeout(type, deleting ? 60 : 100);
+  }
+  type();
+}
+
+// ===================== REVEAL =====================
+function initReveal() {
+  const els = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+      }
+    });
+  }, { threshold: 0.1 });
+  els.forEach(el => obs.observe(el));
+}
+
+// ===================== SKILL BARS =====================
+function initSkillBars() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const bars = e.target.querySelectorAll('.skill-bar');
+        bars.forEach(b => { b.style.width = b.dataset.level + '%'; });
+      }
+    });
+  }, { threshold: 0.2 });
+  const sg = document.getElementById('skills-grid');
+  if (sg) obs.observe(sg);
+}
+
+// ===================== COUNTERS =====================
+function initCounters() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.querySelectorAll('.counter').forEach(c => {
+          const target = parseInt(c.dataset.target);
+          const suffix = c.textContent.replace(/\d+/, '');
+          let n = 0;
+          const step = Math.ceil(target / 50);
+          const iv = setInterval(() => {
+            n = Math.min(n + step, target);
+            c.textContent = n + suffix;
+            if (n >= target) clearInterval(iv);
+          }, 40);
+        });
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.3 });
+  const ag = document.getElementById('ach-grid');
+  if (ag) obs.observe(ag);
+}
+
+// ===================== CURSOR =====================
+function initCursor() {
+  const dot = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  let rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    dot.style.left = e.clientX - 4 + 'px';
+    dot.style.top = e.clientY - 4 + 'px';
+    rx += (e.clientX - 16 - rx) * 0.15;
+    ry += (e.clientY - 16 - ry) * 0.15;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+  });
+
+  document.querySelectorAll('a, button, [role="button"]').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('hover'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+  });
+
+  setInterval(() => {
+    rx += (parseFloat(dot.style.left || 0) + 4 - 16 - rx) * 0.15;
+    ry += (parseFloat(dot.style.top || 0) + 4 - 16 - ry) * 0.15;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+  }, 16);
+}
+
+// ===================== NAV =====================
+function initNav() {
+  const nav = document.getElementById('main-nav');
+  const hb = document.getElementById('hamburger');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+    document.getElementById('backTop').classList.toggle('show', window.scrollY > 400);
+  });
+  hb.addEventListener('click', () => nav.classList.toggle('menu-open'));
+  document.querySelectorAll('.nav-links a').forEach(a => {
+    a.addEventListener('click', () => nav.classList.remove('menu-open'));
+  });
+  document.getElementById('backTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+
+// ===================== CONTACT FORM =====================
+document.getElementById('contact-form').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('form-submit-btn');
+  const status = document.getElementById('form-status');
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+  btn.disabled = true;
+  status.className = 'form-status';
+
+  const name = document.getElementById('form-name').value;
+  const email = document.getElementById('form-email').value;
+  const msg = document.getElementById('form-msg').value;
+
+  await new Promise(r => setTimeout(r, 1200));
+  status.className = 'form-status success';
+  status.textContent = '✓ Message sent! I\'ll get back to you soon.';
+  btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+  btn.disabled = false;
+  this.reset();
+});
+
+// ===================== ADMIN AUTH =====================
+document.getElementById('adminBtn').addEventListener('click', () => {
+  if (adminLoggedIn) {
+    document.getElementById('admin-dash').classList.add('show');
+  } else {
+    document.getElementById('admin-login').classList.add('show');
+    document.getElementById('login-user').focus();
+  }
+});
+document.getElementById('loginClose').addEventListener('click', () => {
+  document.getElementById('admin-login').classList.remove('show');
+});
+document.getElementById('login-submit').addEventListener('click', doLogin);
+document.getElementById('login-pass').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+
+function doLogin() {
+  const u = document.getElementById('login-user').value.trim();
+  const p = document.getElementById('login-pass').value;
+  const err = document.getElementById('login-error');
+  if (u === data.auth.username && p === data.auth.password) {
+    adminLoggedIn = true;
+    document.getElementById('admin-login').classList.remove('show');
+    document.getElementById('admin-dash').classList.add('show');
+    loadDashData();
+    err.style.display = 'none';
+  } else {
+    err.style.display = 'flex';
+    document.getElementById('login-pass').value = '';
+    document.getElementById('login-pass').focus();
+  }
+}
+
+document.getElementById('logoutBtn').addEventListener('click', () => {
+  adminLoggedIn = false;
+  document.getElementById('admin-dash').classList.remove('show');
+});
+
+// ===================== DASHBOARD PANELS =====================
+document.querySelectorAll('.dash-nav-item').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.dash-nav-item').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.dash-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(btn.dataset.panel).classList.add('active');
+  });
+});
+
+function loadDashData() {
+  const d = data;
+  // Hero
+  document.getElementById('d-name').value = d.hero.name;
+  document.getElementById('d-subtitles').value = (d.hero.subtitles || []).join(', ');
+  document.getElementById('d-hero-desc').value = d.hero.desc;
+  document.getElementById('d-resume').value = d.hero.resume || '';
+
+  // About
+  document.getElementById('d-avatar').value = d.about.avatar || '';
+  document.getElementById('d-about-p1').value = d.about.p1.replace(/<[^>]+>/g, '');
+  document.getElementById('d-about-p2').value = d.about.p2.replace(/<[^>]+>/g, '');
+  document.getElementById('d-about-p3').value = d.about.p3.replace(/<[^>]+>/g, '');
+
+  // Stats editor
+  const se = document.getElementById('stats-editor');
+  se.innerHTML = d.about.stats.map((s, i) => `
+    <div class="dash-row" style="margin-bottom:12px">
+      <div class="form-group"><label>Stat ${i+1} Value</label><input class="form-control stat-num-input" data-i="${i}" value="${s.num}"></div>
+      <div class="form-group"><label>Stat ${i+1} Label</label><input class="form-control stat-lbl-input" data-i="${i}" value="${s.label}"></div>
+    </div>`).join('');
+
+  // Skills
+  renderSkillsAdmin();
+
+  // Projects
+  renderProjectsAdmin();
+
+  // Timeline editor
+  const te = document.getElementById('timeline-editor');
+  te.innerHTML = d.timeline.map((t, i) => `
+    <div style="margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--glass-border)">
+      <div class="dash-row">
+        <div class="form-group"><label>Year</label><input class="form-control tl-year" data-i="${i}" value="${t.year}"></div>
+        <div class="form-group"><label>Title</label><input class="form-control tl-title" data-i="${i}" value="${t.title}"></div>
+      </div>
+      <div class="form-group" style="margin-top:8px"><label>Description</label><input class="form-control tl-desc" data-i="${i}" value="${t.desc}"></div>
+      <div class="form-group" style="margin-top:8px;flex-direction:row;align-items:center;gap:8px;display:flex">
+        <input type="checkbox" id="tl-future-${i}" class="tl-future" data-i="${i}" ${t.future ? 'checked' : ''} style="accent-color:var(--cyan)">
+        <label for="tl-future-${i}" style="color:var(--text-2);font-size:0.85rem;cursor:pointer">Mark as future goal</label>
+      </div>
+    </div>`).join('');
+
+  // Achievements editor
+  const ae = document.getElementById('ach-editor');
+  ae.innerHTML = d.achievements.map((a, i) => `
+    <div class="dash-row" style="margin-bottom:14px">
+      <div class="form-group"><label>${a.icon} ${a.label} - Value</label><input type="number" class="form-control ach-num-input" data-i="${i}" value="${a.num}"></div>
+      <div class="form-group"><label>Label</label><input class="form-control ach-lbl-input" data-i="${i}" value="${a.label}"></div>
+    </div>`).join('');
+
+  // Contact
+  document.getElementById('d-email').value = d.contact.email || '';
+  document.getElementById('d-github').value = d.contact.github || '';
+  document.getElementById('d-linkedin').value = d.contact.linkedin || '';
+}
+
+function renderSkillsAdmin() {
+  const list = document.getElementById('skills-admin-list');
+  list.innerHTML = data.skills.map((sk, i) => `
+    <span class="skill-admin-tag glass">
+      ${sk.icon} ${sk.name} (${sk.level}%)
+      <button onclick="removeSkill(${i})" title="Remove"><i class="fas fa-times"></i></button>
+    </span>`).join('');
+}
+
+function addSkill() {
+  const name = document.getElementById('new-skill-name').value.trim();
+  const icon = document.getElementById('new-skill-icon').value.trim();
+  const level = parseInt(document.getElementById('new-skill-level').value);
+  if (!name) return;
+  data.skills.push({ name, icon: icon || '⭐', level });
+  renderSkillsAdmin();
+  document.getElementById('new-skill-name').value = '';
+  document.getElementById('new-skill-icon').value = '';
+}
+
+function removeSkill(i) {
+  data.skills.splice(i, 1);
+  renderSkillsAdmin();
+}
+
+function renderProjectsAdmin() {
+  const list = document.getElementById('projects-admin-list');
+  list.innerHTML = data.projects.map((p, i) => `
+    <div class="project-admin-item glass">
+      <div class="proj-admin-icon">${p.icon}</div>
+      <div class="proj-admin-info">
+        <strong>${p.title}</strong>
+        <span>${p.tech.join(', ')}</span>
+      </div>
+      <div class="proj-admin-btns">
+        <button class="btn-icon" onclick="openProjectModal(${i})" title="Edit"><i class="fas fa-pencil"></i></button>
+        <button class="btn-icon danger" onclick="deleteProject(${i})" title="Delete"><i class="fas fa-trash"></i></button>
+      </div>
+    </div>`).join('');
+}
+
+function openProjectModal(i) {
+  editingProjectIndex = i;
+  const modal = document.getElementById('project-modal');
+  document.getElementById('modal-title').textContent = i === -1 ? 'Add Project' : 'Edit Project';
+  if (i === -1) {
+    document.getElementById('pm-title').value = '';
+    document.getElementById('pm-desc').value = '';
+    document.getElementById('pm-icon').value = '🚀';
+    document.getElementById('pm-tech').value = '';
+    document.getElementById('pm-github').value = '';
+    document.getElementById('pm-demo').value = '';
+  } else {
+    const p = data.projects[i];
+    document.getElementById('pm-title').value = p.title;
+    document.getElementById('pm-desc').value = p.desc;
+    document.getElementById('pm-icon').value = p.icon;
+    document.getElementById('pm-tech').value = p.tech.join(', ');
+    document.getElementById('pm-github').value = p.github;
+    document.getElementById('pm-demo').value = p.demo;
+  }
+  modal.classList.add('show');
+}
+
+function closeProjectModal() {
+  document.getElementById('project-modal').classList.remove('show');
+}
+
+document.getElementById('modal-save-btn').addEventListener('click', () => {
+  const p = {
+    title: document.getElementById('pm-title').value || 'Untitled',
+    desc: document.getElementById('pm-desc').value || '',
+    icon: document.getElementById('pm-icon').value || '🚀',
+    tech: document.getElementById('pm-tech').value.split(',').map(t => t.trim()).filter(Boolean),
+    github: document.getElementById('pm-github').value || '#',
+    demo: document.getElementById('pm-demo').value || '#'
+  };
+  if (editingProjectIndex === -1) {
+    data.projects.push(p);
+  } else {
+    data.projects[editingProjectIndex] = p;
+  }
+  renderProjectsAdmin();
+  closeProjectModal();
+});
+
+function deleteProject(i) {
+  if (confirm('Delete this project?')) {
+    data.projects.splice(i, 1);
+    renderProjectsAdmin();
+  }
+}
+
+// ===================== SAVE SECTIONS =====================
+function saveSection(section) {
+  if (section === 'hero') {
+    data.hero.name = document.getElementById('d-name').value;
+    data.hero.subtitles = document.getElementById('d-subtitles').value.split(',').map(s => s.trim()).filter(Boolean);
+    data.hero.desc = document.getElementById('d-hero-desc').value;
+    data.hero.resume = document.getElementById('d-resume').value;
+  }
+  if (section === 'about') {
+    data.about.avatar = document.getElementById('d-avatar').value;
+    data.about.p1 = document.getElementById('d-about-p1').value;
+    data.about.p2 = document.getElementById('d-about-p2').value;
+    data.about.p3 = document.getElementById('d-about-p3').value;
+    document.querySelectorAll('.stat-num-input').forEach(i => {
+      data.about.stats[i.dataset.i].num = i.value;
+    });
+    document.querySelectorAll('.stat-lbl-input').forEach(i => {
+      data.about.stats[i.dataset.i].label = i.value;
+    });
+  }
+  if (section === 'skills') { /* already in data.skills */ }
+  if (section === 'projects') { /* already in data.projects */ }
+  if (section === 'timeline') {
+    document.querySelectorAll('.tl-year').forEach(i => { data.timeline[i.dataset.i].year = i.value; });
+    document.querySelectorAll('.tl-title').forEach(i => { data.timeline[i.dataset.i].title = i.value; });
+    document.querySelectorAll('.tl-desc').forEach(i => { data.timeline[i.dataset.i].desc = i.value; });
+    document.querySelectorAll('.tl-future').forEach(i => { data.timeline[i.dataset.i].future = i.checked; });
+  }
+  if (section === 'achievements') {
+    document.querySelectorAll('.ach-num-input').forEach(i => { data.achievements[i.dataset.i].num = parseInt(i.value) || 0; });
+    document.querySelectorAll('.ach-lbl-input').forEach(i => { data.achievements[i.dataset.i].label = i.value; });
+  }
+  if (section === 'contact') {
+    data.contact.email = document.getElementById('d-email').value;
+    data.contact.github = document.getElementById('d-github').value;
+    data.contact.linkedin = document.getElementById('d-linkedin').value;
+    data.contact.emailDisplay = document.getElementById('d-email').value;
+    data.contact.githubDisplay = document.getElementById('d-github').value.replace('https://', '');
+    data.contact.linkedinDisplay = document.getElementById('d-linkedin').value.replace('https://', '');
+  }
+  saveData();
+  renderSite();
+  showToast();
+}
+
+function showToast() {
+  const t = document.getElementById('saveToast');
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ===================== INIT =====================
+window.addEventListener('DOMContentLoaded', () => {
+  loadData();
+  renderSite();
+  initParticles();
+  initTyping();
+  initReveal();
+  initSkillBars();
+  initCounters();
+  initCursor();
+  initNav();
+
+  // Loader
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hide');
+    setTimeout(() => document.getElementById('loader').remove(), 600);
+  }, 1900);
+
+  document.getElementById('year').textContent = new Date().getFullYear();
+});
+</script>
+</body>
+</html>
